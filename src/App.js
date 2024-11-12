@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar  from './component/Navbar'
 import Mentor from './pages/Mentor';
 import PeerGroup from './pages/PeerGroup';
+import Courses from './pages/Courses'
 import RegisterMentor from './pages/RegisterMentor';
-import RegisterMentee from './pages/RegisterMentee';
 import Projects from './pages/Projects';
-import Home from './component/Home';
+import Home from './pages/Home';
+import Register from './pages/Register';
+import SignIn from './pages/SignIn';
+
+
+export const logginContext = createContext();
+
+
 
 function App() {
   return (
@@ -18,11 +25,15 @@ function App() {
           <Route path="/mentor" element={<Mentor />} />
           <Route path="/peergroup" element={<PeerGroup />} />
           <Route path="/register-mentor" element={<RegisterMentor />} />
-          <Route path="/register-mentee" element={<RegisterMentee />} />
+          <Route path="/register" element={<Register/>} />
+
+          <Route path="/courses" element={<Courses />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/signin" element={<SignIn/>} />
         </Routes>
       </div>
     </Router>
+
   );
 }
 

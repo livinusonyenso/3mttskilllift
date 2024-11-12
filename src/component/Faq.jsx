@@ -30,31 +30,7 @@ const faqData = [
     answer: "You can join a peer group based on your skill level to receive additional support and guidance from other learners.",
     audioUrl: "path/to/audio5.mp3",
     videoUrl: "https://youtu.be/video5",
-  },
-  {
-    question: "Can I become a mentor if I am an advanced user?",
-    answer: "Absolutely! We welcome advanced users to sign up as mentors to support beginners and intermediates in their learning journey.",
-    audioUrl: "path/to/audio6.mp3",
-    videoUrl: "https://youtu.be/video6",
-  },
-  {
-    question: "What types of resources are available?",
-    answer: "SkillLift provides curated articles, videos, and project templates to help you build practical skills.",
-    audioUrl: "path/to/audio7.mp3",
-    videoUrl: "https://youtu.be/video7",
-  },
-  {
-    question: "Can I track my progress on SkillLift?",
-    answer: "Yes, your progress is tracked across the 12-week pathway, allowing you to see completed projects and milestones.",
-    audioUrl: "path/to/audio8.mp3",
-    videoUrl: "https://youtu.be/video8",
-  },
-  {
-    question: "How can I provide feedback on SkillLift?",
-    answer: "We encourage all users to provide feedback via the contact form or community forums to help us improve the platform.",
-    audioUrl: "path/to/audio9.mp3",
-    videoUrl: "https://youtu.be/video9",
-  },
+  }
 ];
 
 function FAQ() {
