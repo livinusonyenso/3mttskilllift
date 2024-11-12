@@ -6,6 +6,7 @@ import HeroSection from "../component/homepage/HeroSection";
 import FeaturedCourses from "../component/homepage/FeaturedCourses";
 import CourseCategories from "../component/homepage/Categories";
 import RealStoriesCarousel from "../component/homepage/RealStories";
+import PartnerCarousel from "../component/homepage/PartnerCarousel";
 import Footer from "../component/homepage/Footer";
 
 function Home() {
@@ -15,6 +16,7 @@ function Home() {
     <Typewriter/>
     <FeaturedCourses />
     <CourseCategories/>
+   <PartnerCarousel/>
     <RealStoriesCarousel/>
     <FAQ />
     <Footer/>
