@@ -29,6 +29,9 @@ const ResponsiveNavbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="py-2 md:py-0 hover:text-green-800">
+            <Link to="/dashbaord">Dashbaord</Link>
+          </li>
+          <li className="py-2 md:py-0 hover:text-green-800">
             <Link to="/mentor">Mentor</Link>
           </li>
           <li className="py-2 md:py-0 hover:text-green-800">

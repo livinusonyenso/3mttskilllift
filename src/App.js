@@ -9,6 +9,7 @@ import Projects from './pages/Projects';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import { Dashboard } from './pages/Dashboard';
 
 
 export const logginContext = createContext();
@@ -22,6 +23,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/'  element={<Home/>}/>
+          <Route path='/dashbaord'  element={<Dashboard/>}/>
           <Route path="/mentor" element={<Mentor />} />
           <Route path="/peergroup" element={<PeerGroup />} />
           <Route path="/register-mentor" element={<RegisterMentor />} />

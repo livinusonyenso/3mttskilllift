@@ -10,7 +10,7 @@ function Mentor() {
   useEffect(()=>{
     console.log(login)
 
-  },[])
+  })
   return (
     <div className="page-content">
       <h2>Mentor Page</h2>
