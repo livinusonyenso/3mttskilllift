@@ -3,7 +3,7 @@ import { register } from "../controllers/authController.js";
 
 const router = Router()
 
-router.get("/register", register)
+router.post("/register", register)
 
 
 export default router
