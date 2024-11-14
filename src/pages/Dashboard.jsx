@@ -12,7 +12,7 @@ export const Dashboard = () => {
         <Sidebar />
         <div className="flex-1 p-5 overflow-y-auto bg-gray-100">
           <ResourcesSettingsPanel />
-          {/* <LocalTranslatorPanel /> */}
+          <LocalTranslatorPanel />
         </div>
       </div>
     </div>
