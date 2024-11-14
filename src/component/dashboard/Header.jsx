@@ -1,12 +1,23 @@
+// Header.js
 import { useState } from 'react';
-import { FaSearch, FaBell, FaUserCircle } from 'react-icons/fa';
-import logo from '../../assets/logo.png'; // replace with your logo
+import { FaBell, FaUserCircle } from 'react-icons/fa';
+import logo from '../../assets/logo.png';
+import NotificationsModal from './NotificationsModal';
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [unreadNotifications, setUnreadNotifications] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [unreadNotifications, setUnreadNotifications] = useState(3);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+  // Sample notifications
+  const notifications = [
+    "New message from John Doe",
+    "Your account settings have been updated",
+    "Meeting scheduled for tomorrow at 3 PM"
+  ];
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
@@ -15,20 +26,10 @@ const Header = () => {
         <img src={logo} alt="Logo" className="h-8" />
       </div>
 
-      {/* Search Bar */}
-      {/* <div className="relative w-1/3 max-w-md">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full px-4 py-2 pl-10 text-gray-700 bg-gray-100 rounded-full focus:outline-none shadow-sm"
-        />
-        <FaSearch className="absolute left-3 top-2.5 text-gray-400" />
-      </div> */}
-
       {/* Icons: Notifications & Profile */}
       <div className="flex items-center space-x-4">
         {/* Notifications Icon with Badge */}
-        <div className="relative cursor-pointer">
+        <div className="relative cursor-pointer" onClick={toggleModal}>
           <FaBell className="text-gray-600 hover:text-green-600" />
           {unreadNotifications > 0 && (
             <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs text-white bg-green-600 rounded-full">
@@ -51,6 +52,13 @@ const Header = () => {
           )}
         </div>
       </div>
+
+      {/* Notifications Modal */}
+      <NotificationsModal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        notifications={notifications}
+      />
     </header>
   );
 };
