@@ -39,8 +39,7 @@ const HeroSection = () => {
           Empowering the Next Generation through Technology & Learning
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-lg mx-auto drop-shadow-lg">
-          Discover courses, mentorship, and resources tailored to inspire and accelerate your learning journey.
-        </p>
+        Discover courses, mentorship, and resources tailored to inspire and accelerate your learning journey—with access to local language instructors who provide personalized, culturally relevant guidance.        </p>
         <button className="mt-8 px-6 py-3 bg-green-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-green-600 transition duration-300 ease-in-out">
           Get Started
         </button>
