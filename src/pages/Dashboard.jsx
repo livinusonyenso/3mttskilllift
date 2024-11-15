@@ -1,10 +1,11 @@
+
 import React from 'react'
 import Header from '../component/dashboard/Header'
 import Sidebar from '../component/dashboard/Sidebar'
 import LocalTranslatorPanel from '../component/dashboard/LocalTranslatorPanel'
 import ResourcesSettingsPanel from '../component/dashboard/ResourcesSettingsPanel'
 
-export const Dashboard = () => {
+export default function Dashboard() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
@@ -18,3 +19,5 @@ export const Dashboard = () => {
     </div>
   )
 }
+
+

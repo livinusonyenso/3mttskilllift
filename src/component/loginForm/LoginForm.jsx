@@ -1,8 +1,9 @@
 // components/ResponsiveLoginForm.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
 
 // Validation Schema
 const schema = yup.object().shape({
@@ -11,12 +12,14 @@ const schema = yup.object().shape({
 });
 
 const ResponsiveLoginForm = () => {
+  //const { login } = useContext(AuthContext); 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = data => {
-    console.log(data);
+    // Simulate login success
+    //login(); 
   };
 
   return (

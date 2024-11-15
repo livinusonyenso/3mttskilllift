@@ -1,41 +1,38 @@
-import React, { createContext, useState } from 'react';
+// App.js
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar  from './component/Navbar'
 import Mentor from './pages/Mentor';
 import PeerGroup from './pages/PeerGroup';
-import Courses from './pages/Courses'
+import Courses from './pages/Courses';
 import RegisterMentor from './pages/RegisterMentor';
 import Projects from './pages/Projects';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
-import { Dashboard } from './pages/Dashboard';
-
-
-export const logginContext = createContext();
-
-
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './component/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
+import Layout from './component/Layout';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
+    <AuthProvider>
+      <Router>
         <Routes>
-          <Route path='/'  element={<Home/>}/>
-          <Route path='/dashbaord'  element={<Dashboard/>}/>
-          <Route path="/mentor" element={<Mentor />} />
-          <Route path="/peergroup" element={<PeerGroup />} />
-          <Route path="/register-mentor" element={<RegisterMentor />} />
-          <Route path="/register" element={<Register/>} />
-
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/signin" element={<SignIn/>} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="dashboard" element={<ProtectedRoute> <Dashboard /></ProtectedRoute>} />
+            <Route path="mentor" element={<ProtectedRoute><Mentor /></ProtectedRoute>} />
+            <Route path="peergroup"  element={<ProtectedRoute><PeerGroup/></ProtectedRoute>} />
+            <Route path="register-mentor" element={<RegisterMentor />} />
+            <Route path="register" element={<Register />} />
+            <Route path="courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="signin" element={<SignIn />} />
+          </Route>
         </Routes>
-      </div>
-    </Router>
-
+      </Router>
+    </AuthProvider>
   );
 }
 

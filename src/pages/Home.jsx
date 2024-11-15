@@ -7,7 +7,6 @@ import FeaturedCourses from "../component/homepage/FeaturedCourses";
 import CourseCategories from "../component/homepage/Categories";
 import RealStoriesCarousel from "../component/homepage/RealStories";
 import PartnerCarousel from "../component/homepage/PartnerCarousel";
-import Footer from "../component/homepage/Footer";
 
 function Home() {
   return (
@@ -19,7 +18,6 @@ function Home() {
    <PartnerCarousel/>
     <RealStoriesCarousel/>
     <FAQ />
-    <Footer/>
     
     </>
   )
