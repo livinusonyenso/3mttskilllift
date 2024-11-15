@@ -21,7 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="/dashbaord" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
+            <Route path="/dashbaord" element={<Dashboard/>} />
+            {/* <Route path="/dashbaord" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} /> */}
             <Route path="mentor" element={<ProtectedRoute><Mentor /></ProtectedRoute>} />
             <Route path="peergroup"  element={<ProtectedRoute><PeerGroup/></ProtectedRoute>} />
             <Route path="register-mentor" element={<RegisterMentor />} />
