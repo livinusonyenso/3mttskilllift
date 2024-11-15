@@ -9,7 +9,7 @@ import Projects from './pages/Projects';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './component/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './component/Layout';
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="dashboard" element={<ProtectedRoute> <Dashboard /></ProtectedRoute>} />
+            <Route path="/dashbaord" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
             <Route path="mentor" element={<ProtectedRoute><Mentor /></ProtectedRoute>} />
             <Route path="peergroup"  element={<ProtectedRoute><PeerGroup/></ProtectedRoute>} />
             <Route path="register-mentor" element={<RegisterMentor />} />

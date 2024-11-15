@@ -6,8 +6,10 @@ import LocalTranslatorPanel from '../component/dashboard/LocalTranslatorPanel'
 import ResourcesSettingsPanel from '../component/dashboard/ResourcesSettingsPanel'
 
 export default function Dashboard() {
+  let x = 10
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>',x)
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen"> 
       <Header />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
