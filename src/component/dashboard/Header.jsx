@@ -1,29 +1,51 @@
 // Header.js
-import { useState } from 'react';
-import { FaBell, FaCog } from 'react-icons/fa';
-import NotificationsModal from './NotificationsModal';
+import { useState, useEffect } from "react";
+import { FaBell, FaCog } from "react-icons/fa";
+import NotificationsModal from "./NotificationsModal";
+import AccountSettings from "./AccountSettings";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(3);
   const [profileImage, setProfileImage] = useState(null);
+  const [showAccountSettings, setShowAccountSettings] = useState(false);
+
+  // Load the profile image from local storage on component mount
+  useEffect(() => {
+    const savedProfileImage = localStorage.getItem("profileImage");
+    if (savedProfileImage) {
+      setProfileImage(savedProfileImage);
+    }
+  }, []);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  const handleImageUpload = (e) => {
+  // Convert image file to Base64
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // Handle image upload, convert to Base64, and save to local storage
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+      const base64Image = await convertToBase64(file);
+      setProfileImage(base64Image);
+      localStorage.setItem("profileImage", base64Image); // Save to local storage as Base64
     }
   };
 
   const notifications = [
     "New message from John Doe",
     "Your account settings have been updated",
-    "Meeting scheduled for tomorrow at 3 PM"
+    "Meeting scheduled for tomorrow at 3 PM",
   ];
 
   return (
@@ -45,7 +67,7 @@ const Header = () => {
             />
           ) : (
             <img
-              src={'/path/to/default-logo.png'} // Use a default logo path here
+              src={"/path/to/default-logo.png"} // Use a default logo path here
               alt="Logo"
               className="h-10 w-auto rounded-full object-cover border-2 border-white shadow-md group-hover:ring-2 group-hover:ring-offset-2 group-hover:ring-blue-500 transition duration-300"
             />
@@ -55,16 +77,20 @@ const Header = () => {
 
       {/* Title and Progress Bar Centered */}
       <div className="text-center space-y-1">
-        <h1 className="text-2xl font-bold text-white tracking-wide">Software Development</h1>
+        <h1 className="text-2xl font-bold text-white tracking-wide">
+          Software Development
+        </h1>
         {/* Progress Bar */}
         <div className="flex items-center justify-center space-x-2 mt-1">
           <div className="relative w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
             <div
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-green-500 to-blue-600 rounded-full transition-all duration-500"
-              style={{ width: '25%' }} // Example completion
+              style={{ width: "25%" }} // Example completion
             ></div>
           </div>
-          <span className="text-sm text-gray-100 font-semibold">25% Completed</span>
+          <span className="text-sm text-gray-100 font-semibold">
+            25% Completed
+          </span>
         </div>
       </div>
 
@@ -81,15 +107,31 @@ const Header = () => {
         </div>
 
         {/* Settings Icon with Dropdown */}
-        <div className="relative">
+        <div className="relative z-50">
           <FaCog
             className="text-white text-xl hover:text-yellow-300 cursor-pointer transition duration-300"
             onClick={toggleDropdown}
           />
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 text-gray-700">
-              <a href="#account" className="block px-4 py-2 hover:bg-gray-100">Account Settings</a>
-              <a href="#logout" className="block px-4 py-2 hover:bg-gray-100">Logout</a>
+              <a
+                href="#account"
+                className="block px-4 py-2 hover:bg-gray-100"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowAccountSettings(true);
+                }}
+              >
+                Account Settings
+              </a>
+
+              {showAccountSettings && <AccountSettings />}
+              {/* <a href="#account" className="block px-4 py-2 hover:bg-gray-100">
+                Account Settings
+              </a> */}
+              <a href="#logout" className="block px-4 py-2 hover:bg-gray-100">
+                Logout
+              </a>
             </div>
           )}
         </div>

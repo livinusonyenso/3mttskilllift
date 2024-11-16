@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './component/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './component/Layout';
+import ForgotPassword from './component/loginForm/ForgotPassword';
 
 function App() {
   return (
@@ -26,9 +27,10 @@ function App() {
             <Route path="mentor" element={<ProtectedRoute><Mentor /></ProtectedRoute>} />
             <Route path="peergroup"  element={<ProtectedRoute><PeerGroup/></ProtectedRoute>} />
             <Route path="register-mentor" element={<RegisterMentor />} />
-            <Route path="register" element={<Register />} />
             <Route path="courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
             <Route path="projects" element={<Projects />} />
+            <Route path="register" element={<Register />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="signin" element={<SignIn />} />
           </Route>
         </Routes>

@@ -1,9 +1,9 @@
-// components/ResponsiveLoginForm.js
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
+import apiClient from '../../utils/axios';
 
 // Validation Schema
 const schema = yup.object().shape({
@@ -12,14 +12,27 @@ const schema = yup.object().shape({
 });
 
 const ResponsiveLoginForm = () => {
-  //const { login } = useContext(AuthContext); 
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = data => {
-    // Simulate login success
-    //login(); 
+  const [loading, setLoading] = useState(false); // State to manage loading spinner
+
+  const onSubmit = async (data) => {
+    setLoading(true); // Start loading
+    try {
+      const response = await apiClient.post('/auth/login', data);
+      console.log('Login successful:', response.data);
+      localStorage.setItem('authToken', response.data.token); // Save the token for authenticated requests
+      alert('Login successful!');
+      navigate('/dashboard'); // Redirect to the correct route
+    } catch (error) {
+      console.error('Login failed:', error.response?.data || error.message);
+      alert('Failed to login. Please check your credentials and try again.');
+    } finally {
+      setLoading(false); // End loading
+    }
   };
 
   return (
@@ -52,15 +65,23 @@ const ResponsiveLoginForm = () => {
         <div>
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-3 px-6 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+            disabled={loading}
+            className={`w-full bg-green-500 text-white py-3 px-6 rounded-md ${
+              loading ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
+            } focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-center`}
           >
-            Login
+            {loading && (
+              <span className="loader mr-2 w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+            )}
+            {loading ? "Logging in..." : "Login"}
           </button>
         </div>
 
         {/* Forgot Password Link */}
         <div className="text-center mt-4">
-          <a href="#" className="text-sm text-green-600 hover:underline">Forgot Password?</a>
+          <Link to="/forgot-password" className="text-sm text-green-600 hover:underline">
+            Forgot Password?
+          </Link>
         </div>
       </form>
     </div>
