@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -54,6 +55,10 @@ const userSchema = new mongoose.Schema({
         require: [true, "Area of interest required!"]
     }
 })
+
+userSchema.methods.comparePassword = async function(userPass, passInDb){
+    return await bcrypt.compare(userPass, passInDb)
+}
 
 const User = mongoose.model("User", userSchema)
 
