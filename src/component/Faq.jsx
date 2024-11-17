@@ -23,7 +23,7 @@ const faqData = [
   },
   {
     question: "Can I access all courses offline?",
-    answer: "Yes, but ensure you have enough storage.",
+    answer: "Yes, SkillLift allows you to access courses offline by downloading them directly on the platform. The platform syncs your progress and updates any new content automatically during the weekend when connected to the internet.",
    
   },
   {
