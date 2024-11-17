@@ -27,12 +27,20 @@ const ResponsiveLoginForm = () => {
     setLoading(true); // Start loading
     try {
       const response = await apiClient.post('/auth/login', data);
+    // Log the response data
+    console.log('Response:', response);
+    console.log('Response Data:', response.data);
+
+    // Log token
+    console.log('Token:', response.data.token);
+
+    // Log user information if available
+    console.log('User:', response.data.user || 'No user data available');
       toast.success('Login successful!', {
         position: "top-center",
         autoClose: 3000,
       }); // Show success toast
       login(response.data.token);
-      console.log(response.data)
 
        navigate('/dashboard')
     

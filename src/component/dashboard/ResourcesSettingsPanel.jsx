@@ -1,6 +1,6 @@
 // src/components/ResourcesSettingsPanel.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import videoData from './dataTypes/videoData';
 import ebookData from './dataTypes/ebookData';
 import articleData from './dataTypes/articleData';
@@ -8,24 +8,13 @@ import podcastData from './dataTypes/podcastData';
 
 const ResourcesSettingsPanel = () => {
   const [activeTab, setActiveTab] = useState('Video');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const itemsPerPage = 10;
-  const totalPages = Math.ceil(videoData.length / itemsPerPage);
 
   const handleTabClick = (tab) => {
     setLoading(true);
     setActiveTab(tab);
     setTimeout(() => setLoading(false), 500);
-  };
-
-  const handleCardClick = (course) => {
-    setSelectedCourse(course);
-    setIsModalOpen(true);
   };
 
   return (
@@ -51,7 +40,7 @@ const ResourcesSettingsPanel = () => {
       {/* Search Bar */}
       <input
         type="text"
-        placeholder="Search courses..."
+        placeholder="Search resources..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="p-3 mb-4 w-full border border-gray-300 rounded-lg shadow-sm"
@@ -64,12 +53,11 @@ const ResourcesSettingsPanel = () => {
         </div>
       ) : (
         <div>
-          {/* Display Content Based on Active Tab */}
-          {activeTab === 'Video' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {videoData.map((video, index) => (
-                <div key={video.id} className="relative bg-white shadow-lg rounded-lg overflow-hidden">
-                  {/* Video Thumbnail */}
+          {/* Content Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {activeTab === 'Video' &&
+              videoData.map((video) => (
+                <div key={video.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                   <a href={video.link} target="_blank" rel="noopener noreferrer">
                     <img src={video.image} alt={`${video.title} thumbnail`} className="w-full h-40 object-cover" />
                   </a>
@@ -80,12 +68,9 @@ const ResourcesSettingsPanel = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          )}
 
-          {activeTab === 'Ebook' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {ebookData.map((ebook, index) => (
+            {activeTab === 'Ebook' &&
+              ebookData.map((ebook, index) => (
                 <div key={index} className="p-4 bg-white shadow-lg rounded-lg text-center">
                   <h3 className="text-lg font-semibold text-gray-800">{ebook.title}</h3>
                   <p className="text-sm text-gray-600 mb-4">{ebook.description}</p>
@@ -98,12 +83,9 @@ const ResourcesSettingsPanel = () => {
                   </a>
                 </div>
               ))}
-            </div>
-          )}
 
-          {activeTab === 'Articles' && (
-            <div className="space-y-4">
-              {articleData.map((article, index) => (
+            {activeTab === 'Articles' &&
+              articleData.map((article, index) => (
                 <a
                   key={index}
                   href={article.link}
@@ -115,19 +97,15 @@ const ResourcesSettingsPanel = () => {
                   <p className="text-sm text-gray-700">Click to read this article on an external site.</p>
                 </a>
               ))}
-            </div>
-          )}
 
-          {activeTab === 'Podcasts' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {podcastData.map((podcast, index) => (
+            {activeTab === 'Podcasts' &&
+              podcastData.map((podcast, index) => (
                 <div key={index} className="p-4 bg-white shadow-lg rounded-lg text-center">
                   <h3 className="text-lg font-semibold text-gray-800">{podcast.title}</h3>
                   <audio controls src={podcast.audioLink} className="w-full mt-2" />
                 </div>
               ))}
-            </div>
-          )}
+          </div>
         </div>
       )}
     </div>
