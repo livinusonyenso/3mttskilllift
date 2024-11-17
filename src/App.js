@@ -1,5 +1,5 @@
 // App.js
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mentor from './pages/Mentor';
 import PeerGroup from './pages/PeerGroup';
@@ -11,15 +11,11 @@ import Register from './pages/Register';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './component/ProtectedRoute';
-import { AuthContext } from './context/AuthContext';
 import Layout from './component/Layout';
 import ForgotPassword from './component/loginForm/ForgotPassword';
 
 function App() {
-  const context = useContext(AuthContext);
-  useEffect(()=>{
-    console.log(context, 'reaching here')
-  }, [context])
+  
   return (
     <Router>
         <Routes>

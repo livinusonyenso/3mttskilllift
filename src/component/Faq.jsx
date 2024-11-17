@@ -2,35 +2,45 @@ import React, { useState } from 'react';
 
 const faqData = [
   {
-    question: "How can I download my LinkedIn certificate?",
-    answer: " Answer: [Provide download steps or a link to LinkedIn’s certificate download instructions.]",
-    audioUrl: "path/to/audio1.mp3",
-    videoUrl: "https://youtu.be/video1",
+    question: "What is SkillLift?",
+    answer: "SkillLift is an online learning platform that provides courses, projects, and community resources tailored for secondary school students. It empowers them to develop skills, compete effectively on a global scale, and contributes to reducing unemployment in Nigeria for the next generation.",
+ 
   },
   {
-    question: "Do I need to pay for my English Level 1 and Level 2 certificates?",
-    answer: "MAnswer: No, there is no cost for obtaining your English Level 1 and Level 2 certificates.",
-    audioUrl: "path/to/audio2.mp3",
-    videoUrl: "https://youtu.be/video2",
+    question: "How do I access courses?",
+    answer: "Browse our course catalog, select a course, and enroll to access its content.",
+
   },
   {
-    question: "How can I download my achievement badge?",
-    answer: "Answer: [Provide download steps or a link to LinkedIn’s badge download instructions.]",
-    audioUrl: "path/to/audio3.mp3",
-    videoUrl: "https://youtu.be/video3",
+    question: "What is the offline feature?",
+    answer: "Download courses for offline access, and sync progress when connected.",
+  
   },
   {
-    question: "What happens if I fail my foundational LinkedIn exam three times?",
-    answer: "Answer: [Explain LinkedIn’s policy for retaking exams, including any waiting periods or limitations after multiple failed attempts.]",
-    audioUrl: "path/to/audio4.mp3",
-    videoUrl: "https://youtu.be/video4",
+    question: "What languages are available?",
+    answer: "Our platform supports Igbo, Yoruba, and Hausa.",
+    
   },
   {
-    question: "How do I join a peer group?",
-    answer: "You can join a peer group based on your skill level to receive additional support and guidance from other learners.",
-    audioUrl: "path/to/audio5.mp3",
-    videoUrl: "https://youtu.be/video5",
-  }
+    question: "Can I access all courses offline?",
+    answer: "Yes, but ensure you have enough storage.",
+   
+  },
+  {
+    question: "How do I report technical issues?",
+    answer: "Contact our support team.",
+   
+  },
+  {
+    question: "Can I interact with instructors?",
+    answer: "Yes, through discussion forums.",
+    
+  },
+  {
+    question: "How do I contact support?",
+    answer: "Email [support email], phone [support number], or live chat.",
+
+  },
 ];
 
 function FAQ() {
@@ -42,7 +52,7 @@ function FAQ() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-100 rounded-lg">
-      <h2 className="text-3xl font-bold text-center text-green-600 mb-8">Frequently Asked Questions</h2>
+      <h2 className="text-3xl font-bold text-center text-green-600 mb-8">SkillLift FAQs</h2>
       <div className="space-y-4">
         {faqData.map((faq, index) => (
           <div key={index} className="border-b border-gray-300">
@@ -56,24 +66,7 @@ function FAQ() {
             {activeIndex === index && (
               <div className="pl-4 pr-2 pb-4 transition-all duration-500 ease-in-out text-gray-600">
                 <p className="mb-2">{faq.answer}</p>
-                <div className="flex space-x-4">
-                  <a
-                    href={faq.audioUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700"
-                  >
-                    Listen to Audio
-                  </a>
-                  <a
-                    href={faq.videoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-                  >
-                    Watch Video
-                  </a>
-                </div>
+                
               </div>
             )}
           </div>

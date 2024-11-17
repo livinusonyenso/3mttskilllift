@@ -32,7 +32,8 @@ const ResponsiveLoginForm = () => {
         autoClose: 3000,
       }); // Show success toast
       login(response.data.token);
-      
+      console.log(response.data)
+
        navigate('/dashboard')
     
     } catch (error) {
