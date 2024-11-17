@@ -7,24 +7,25 @@ import 'slick-carousel/slick/slick-theme.css';
 // Testimonial data
 const testimonials = [
   {
-    quote: "SkillLift transformed my son's approach to learning. He’s now more confident and engaged!",
+    quote: "SkillLift empowered my son with valuable tech skills. He’s now coding confidently and loves solving real-world problems!",
     name: "Linda Thompson",
     role: "Parent",
     image: "https://pbs.twimg.com/profile_images/1844754952993812490/qeh1hsKK_400x400.jpg",
   },
   {
-    quote: "I used to struggle with math, but SkillLift made it fun and easy to understand.",
+    quote: "Learning tech skills with SkillLift made a huge difference! I went from struggling to building projects I’m proud of.",
     name: "Jake Harris",
     role: "Student",
     image: "https://pbs.twimg.com/profile_images/1852067144038780931/b22VOX81_400x400.jpg",
   },
   {
-    quote: "As a parent, I feel more involved in my child's learning progress, thanks to SkillLift.",
+    quote: "As a parent, I’m thrilled to see my child learning skills that will set them up for future success in tech and innovation.",
     name: "Maria Gomez",
     role: "Parent",
     image: "https://pbs.twimg.com/profile_images/1811473980966207491/g-V3s0I8_400x400.jpg",
   },
 ];
+
 
 const RealStoriesCarousel = () => {
   const settings = {

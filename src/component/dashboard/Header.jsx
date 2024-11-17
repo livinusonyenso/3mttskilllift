@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { FaBell, FaCog } from "react-icons/fa";
 import NotificationsModal from "./NotificationsModal";
 import AccountSettings from "./AccountSettings";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -10,6 +12,39 @@ const Header = () => {
   const [unreadNotifications, setUnreadNotifications] = useState(3);
   const [profileImage, setProfileImage] = useState(null);
   const [showAccountSettings, setShowAccountSettings] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [userSkill, setUserSkill] = useState(0); 
+  const { logout, auth } = useAuth(); 
+
+  // Fetch user profile data from API on component mount
+  useEffect(() => {
+    const fetchUserData = async () => {
+      console.log(auth)
+      console.log(auth.token)
+      try {
+        const response = await axios.get(
+          "https://threemttskilllift-backend.onrender.com/api/v1/auth/current-user",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
+
+        const data = response.data;
+        setUserName(data.name || "User"); // Default to "User" if no name provided
+        setUserSkill(data.skill || 0); // Default skill to 0% if not provided
+        console.log('>>>>>>>>>>>>',response)
+        console.log('>>>>>>>>>>>>',response.data)
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        console.log(error)
+      }
+    };
+
+    fetchUserData();
+  }, [auth.token]);
 
   // Load the profile image from local storage on component mount
   useEffect(() => {
@@ -73,23 +108,24 @@ const Header = () => {
             />
           )}
         </label>
+        {/* <span>{data.name}</span> */}
       </div>
 
-      {/* Title and Progress Bar Centered */}
+      {/* Title, Username, and Progress Bar Centered */}
       <div className="text-center space-y-1">
         <h1 className="text-2xl font-bold text-white tracking-wide">
-          Software Development
+          {userName || "Software Development"}
         </h1>
         {/* Progress Bar */}
         <div className="flex items-center justify-center space-x-2 mt-1">
           <div className="relative w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
             <div
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-green-500 to-blue-600 rounded-full transition-all duration-500"
-              style={{ width: "25%" }} // Example completion
+              style={{ width: `${userSkill}%` }} // Set width to userSkill percentage
             ></div>
           </div>
           <span className="text-sm text-gray-100 font-semibold">
-            25% Completed
+            {userSkill}% Completed
           </span>
         </div>
       </div>
@@ -124,12 +160,8 @@ const Header = () => {
               >
                 Account Settings
               </a>
-
               {showAccountSettings && <AccountSettings />}
-              {/* <a href="#account" className="block px-4 py-2 hover:bg-gray-100">
-                Account Settings
-              </a> */}
-              <a href="#logout" className="block px-4 py-2 hover:bg-gray-100">
+              <a href="#logout" className="block px-4 py-2 hover:bg-gray-100" onClick={logout}>
                 Logout
               </a>
             </div>
