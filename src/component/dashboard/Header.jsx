@@ -68,7 +68,7 @@ const Header = () => {
           ) : (
             <img
               src={"/path/to/default-logo.png"} // Use a default logo path here
-              alt="Logo"
+              alt="Upload profile"
               className="h-10 w-auto rounded-full object-cover border-2 border-white shadow-md group-hover:ring-2 group-hover:ring-offset-2 group-hover:ring-blue-500 transition duration-300"
             />
           )}
