@@ -37,11 +37,20 @@ const ResponsiveNavbar = () => {
             isOpen ? "block" : "hidden"
           } absolute md:relative top-0 left-0 md:top-auto md:left-auto bg-white md:bg-transparent w-full md:w-auto p-6 md:p-0 z-20`}
         >
-          <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/" onClick={closeMenu}>
+        
+          {!auth.token ? (
+            <li className="py-2 md:py-0 hover:text-green-800">
+              <Link to="/" onClick={closeMenu}>
               Home
-            </Link>
-          </li>
+              </Link>
+            </li>
+          ) : (
+            <li className="py-2 md:py-0 hover:text-green-800">
+              <Link to="/dashboard" onClick={closeMenu}>
+              Dashboard
+              </Link>
+            </li>
+          )}
           <li className="py-2 md:py-0 hover:text-green-800">
             <Link to="/mentor" onClick={closeMenu}>
               Mentor
