@@ -1,20 +1,17 @@
-
-
-
+// components/ProtectedRoute.js
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext'; // make sure the import path is correct
+import { AuthContext } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useContext(AuthContext); // get the authentication status
-  
-  // If not logged in, navigate to /signin
-  if (!isLoggedIn) {
-    return <Navigate to="/signin" replace />;
-    console.log(isLoggedIn)
+  const { isLoggedIn } = useContext(AuthContext);
+  const token = localStorage.getItem('authToken');
+
+  // Redirect to login if not authenticated
+  if (!isLoggedIn && !token) {
+    return <Navigate to="/signin" />;
   }
 
-  // If logged in, render the component
   return children;
 };
 

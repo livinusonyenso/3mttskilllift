@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+import useAuth from "../hooks/useAuth";
 
 const ResponsiveNavbar = () => {
+  const {auth, logout} = useAuth()
   const [isOpen, setIsOpen] = useState(false);
 
   // Function to toggle the menu
@@ -12,25 +14,27 @@ const ResponsiveNavbar = () => {
     <nav className="bg-white shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo */}
-        <div className="text-green-600 font-bold text-2xl"><Link to='/'>SkillLift</Link></div>
+        <div className="text-green-600 font-bold text-2xl">
+          <Link to="/">SkillLift</Link>
+        </div>
 
         {/* Hamburger Icon for Mobile */}
-        <div className="md:hidden text-green-600 text-2xl cursor-pointer z-30" onClick={toggleMenu}>
+        <div
+          className="md:hidden text-green-600 text-2xl cursor-pointer z-30"
+          onClick={toggleMenu}
+        >
           {isOpen ? <FaTimes /> : <FaBars />}
         </div>
 
-        {/* Navigation Links (hidden on mobile, visible on md screens and up) */}
+        {/* Navigation Links */}
         <ul
           className={`md:flex md:items-center md:space-x-8 text-green-600 font-semibold transition-all duration-300 ease-in-out ${
-            isOpen ? 'block' : 'hidden'
+            isOpen ? "block" : "hidden"
           } absolute md:relative top-0 left-0 md:top-auto md:left-auto bg-white md:bg-transparent w-full md:w-auto p-6 md:p-0 z-20`}
         >
           <li className="py-2 md:py-0 hover:text-green-800">
             <Link to="/">Home</Link>
           </li>
-          {/* <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/dashbaord">Dashbaord</Link>
-          </li> */}
           <li className="py-2 md:py-0 hover:text-green-800">
             <Link to="/mentor">Mentor</Link>
           </li>
@@ -40,12 +44,32 @@ const ResponsiveNavbar = () => {
           <li className="py-2 md:py-0 hover:text-green-800">
             <Link to="/courses">Courses</Link>
           </li>
-          <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/register">Register</Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/signin">Sign In</Link>
-          </li>
+          {!auth.token ? (
+            <li className="py-2 md:py-0 hover:text-green-800">
+              <Link to="/register">Register</Link>
+            </li>
+          ) : (
+            <li className="py-2 md:py-0 hover:text-green-800">
+              <Link to="/projects">Projects</Link>
+            </li>
+          )}
+          {!auth.token ? (
+            <li className="py-2 md:py-0 hover:text-green-800">
+              <Link to="/signin">Sign In</Link>
+            </li>
+          ) : (
+            <li className="py-2 md:py-0 hover:text-green-800">
+              <button
+                onClick={() => {
+                  logout(); // Call logout from AuthContext
+                  setIsOpen(false); // Close the menu on logout
+                }}
+                className="bg-transparent border-none cursor-pointer text-green-600 hover:text-green-800"
+              >
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

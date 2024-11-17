@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
+import { useNavigate, Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify'; // Import toast functions
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
 import apiClient from '../../utils/axios';
+import useAuth from "../../hooks/useAuth"
 
 // Validation Schema
 const schema = yup.object().shape({
@@ -12,6 +15,7 @@ const schema = yup.object().shape({
 });
 
 const ResponsiveLoginForm = () => {
+  const {login}  = useAuth()
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -23,18 +27,23 @@ const ResponsiveLoginForm = () => {
     setLoading(true); // Start loading
     try {
       const response = await apiClient.post('/auth/login', data);
-      console.log('Login successful>>>>>>>>>>>>>>:', response);
-      console.log('Login successful>>>>>>>>>:', response.data);
-      console.log('Login successful>>>>>>>>>>>>>:', response.token);
-      localStorage.setItem('authToken', response.data.token); // Save the token for authenticated requests
-      alert('Login successful!');
-      navigate('/dashbaord'); // Redirect to the correct route
+      toast.success('Login successful!', {
+        position: "top-center",
+        autoClose: 3000,
+      }); // Show success toast
+      login(response.data.token);
+      
+       navigate('/dashboard')
+    
     } catch (error) {
+      // Handle error response
+      const errorMessage =
+        error.response?.data?.message || 'Failed to login. Please check your credentials.';
+      toast.error(errorMessage, {
+        position: "top-center",
+        autoClose: 3000,
+      }); // Show error toast
       console.error('Login failed:', error.response?.data || error.message);
-      console.log('>>>>>>>>>>>>>>',error)
-      console.log('>>>>>>>>>>>>>>',error.response)
-      console.log('>>>>>>>>>>>>>>',error.response?.data)
-     // alert('Failed to login. Please check your credentials and try again.');
     } finally {
       setLoading(false); // End loading
     }
@@ -42,6 +51,7 @@ const ResponsiveLoginForm = () => {
 
   return (
     <div className="max-w-sm mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+      <ToastContainer /> {/* Add the ToastContainer */}
       <h2 className="text-2xl font-semibold text-center text-green-600 mb-6">Login</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Email Field */}
@@ -72,13 +82,13 @@ const ResponsiveLoginForm = () => {
             type="submit"
             disabled={loading}
             className={`w-full bg-green-500 text-white py-3 px-6 rounded-md ${
-              loading ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
+              loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-600'
             } focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-center`}
           >
             {loading && (
               <span className="loader mr-2 w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
             )}
-            {loading ? "Logging in..." : "Login"}
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </div>
 
