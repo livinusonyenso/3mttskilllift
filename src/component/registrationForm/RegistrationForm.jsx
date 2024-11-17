@@ -48,30 +48,28 @@ const ResponsiveRegistrationForm = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    
-    // Map form data to the required API format
+
     const mappedData = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
-      confirmPass: data.confirmPassword, // Adjusting to match API
+      confirmPass: data.confirmPassword,
       role: data.role,
-      dateOfBirth: data.birthDate, // Adjusting to match API
+      dateOfBirth: data.birthDate,
       location: data.location,
-      phoneNo: data.phoneNumber, // Adjusting to match API
+      phoneNo: data.phoneNumber,
       school: data.school,
       gradeLevel: data.gradeLevel,
       areaOfInterest: data.areaOfInterest,
     };
-  
+
     try {
-      console.log(mappedData); // Check the mapped data
+      console.log(mappedData);
       const response = await apiClient.post("/auth/register", mappedData);
       reset();
-      //console.log("Registration successful:", response.data);
-  
-      // Show success toast
+      console.log("Registration successful:", response.data);
+
       toast.success("Registration successful! Redirecting to login...", {
         position: "top-center",
         autoClose: 3000,
@@ -93,7 +91,6 @@ const ResponsiveRegistrationForm = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
@@ -103,7 +100,6 @@ const ResponsiveRegistrationForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Form fields */}
         {[
           { label: "First Name", name: "firstName", type: "text" },
           { label: "Last Name", name: "lastName", type: "text" },
@@ -125,8 +121,25 @@ const ResponsiveRegistrationForm = () => {
           { label: "Location", name: "location", type: "text" },
           { label: "Phone Number", name: "phoneNumber", type: "text" },
           { label: "School", name: "school", type: "text" },
-          { label: "Grade Level", name: "gradeLevel", type: "text" },
-          { label: "Area of Interest", name: "areaOfInterest", type: "text" },
+          {
+            label: "Grade",
+            name: "gradeLevel",
+            type: "select",
+            options: ["", "SS1", "SS2", "SS3"],
+          },
+          {
+            label: "Area of Interest",
+            name: "areaOfInterest",
+            type: "select",
+            options: [
+              "",
+              "Web Development",
+              "Data Science",
+              "Cybersecurity",
+              "Graphic Design",
+              "Robotics",
+            ],
+          },
         ].map(({ label, name, type, options }) => (
           <div key={name}>
             <label className="block text-lg font-medium text-gray-700">
