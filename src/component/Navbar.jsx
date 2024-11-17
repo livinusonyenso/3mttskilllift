@@ -4,18 +4,23 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 
 const ResponsiveNavbar = () => {
-  const {auth, logout} = useAuth()
+  const { auth, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   // Function to toggle the menu
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Function to close the menu when a link is clicked
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo */}
         <div className="text-green-600 font-bold text-2xl">
-          <Link to="/">SkillLift</Link>
+          <Link to="/" onClick={closeMenu}>
+            SkillLift
+          </Link>
         </div>
 
         {/* Hamburger Icon for Mobile */}
@@ -33,36 +38,50 @@ const ResponsiveNavbar = () => {
           } absolute md:relative top-0 left-0 md:top-auto md:left-auto bg-white md:bg-transparent w-full md:w-auto p-6 md:p-0 z-20`}
         >
           <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={closeMenu}>
+              Home
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/mentor">Mentor</Link>
+            <Link to="/mentor" onClick={closeMenu}>
+              Mentor
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/peergroup">Peer Group</Link>
+            <Link to="/peergroup" onClick={closeMenu}>
+              Peer Group
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-green-800">
-            <Link to="/courses">Courses</Link>
+            <Link to="/courses" onClick={closeMenu}>
+              Courses
+            </Link>
           </li>
           {!auth.token ? (
             <li className="py-2 md:py-0 hover:text-green-800">
-              <Link to="/register">Register</Link>
+              <Link to="/register" onClick={closeMenu}>
+                Register
+              </Link>
             </li>
           ) : (
             <li className="py-2 md:py-0 hover:text-green-800">
-              <Link to="/projects">Projects</Link>
+              <Link to="/projects" onClick={closeMenu}>
+                Projects
+              </Link>
             </li>
           )}
           {!auth.token ? (
             <li className="py-2 md:py-0 hover:text-green-800">
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signin" onClick={closeMenu}>
+                Sign In
+              </Link>
             </li>
           ) : (
             <li className="py-2 md:py-0 hover:text-green-800">
               <button
                 onClick={() => {
                   logout(); // Call logout from AuthContext
-                  setIsOpen(false); // Close the menu on logout
+                  closeMenu(); // Close the menu on logout
                 }}
                 className="bg-transparent border-none cursor-pointer text-green-600 hover:text-green-800"
               >
