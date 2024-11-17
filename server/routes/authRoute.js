@@ -1,26 +1,49 @@
 import { Router } from "express";
 import { register } from "../controllers/authController.js";
 import passport from "passport";
+import { loginValidation, registerValidation } from "../middlewares/validationMiddleware.js";
+import { validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
 
 const router = Router()
 
-router.post("/register", register)
+router.post("/register", registerValidation, register)
 
-router.post('/login', async(req, res, next) => {
+router.post('/login', loginValidation, async(req, res, next) => {
+
+    const errors = validationResult(req);
+    
+    if (!errors.isEmpty()) {
+        const errorMessage = errors.array().map((err) => err.msg)
+
+        return res.status(400).json({ errors: errorMessage });
+    }
+
     passport.authenticate('local', {session: false}, (err, user, info) => {
-        console.log(req.body);
-        
         if (err) return next(err);
-
-        if(!user){
+        if (!user){
             return res.status(400).json({
                 message: info.message || "Invalid Credentials"
             })
         }
 
         user.password = undefined
+        
+        // Generate JWTs
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {expiresIn: '15m'});
+        
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Strict',
+            maxAge: 15 * 60 * 1000, //15 minutes
+        });
 
-        console.log(user);
+        req.user = user
+
+        return res.status(200).json({
+            message: 'Login successful',
+        })
         
     })(req, res, next)
 })
