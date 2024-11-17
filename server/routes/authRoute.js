@@ -4,6 +4,7 @@ import passport from "passport";
 import { loginValidation, registerValidation } from "../middlewares/validationMiddleware.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
+import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = Router()
 
@@ -26,8 +27,6 @@ router.post('/login', loginValidation, async(req, res, next) => {
                 message: info.message || "Invalid Credentials"
             })
         }
-
-        user.password = undefined
         
         // Generate JWTs
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {expiresIn: '15m'});
@@ -43,9 +42,27 @@ router.post('/login', loginValidation, async(req, res, next) => {
 
         return res.status(200).json({
             message: 'Login successful',
+            token
         })
         
     })(req, res, next)
+})
+
+router.get('/current-user', isAuthenticated, (req, res, next) => {
+    const { user } = req
+    
+    if (!user){
+        return res.status(401).json({
+            status: "fail",
+            message: "Access Denied"
+        })
+    }
+
+    res.status(200).json({
+        status: "success",
+        data: user
+    })
+    
 })
 
 
