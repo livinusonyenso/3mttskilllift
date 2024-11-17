@@ -49,8 +49,7 @@ const Sidebar = () => {
               <option>Hausa</option>
               <option>Igbo</option>
               <option>Yoruba</option>
-              <option>Efik</option>
-              <option>Calabar</option>
+           
             </select>
           </>
         ) : (
