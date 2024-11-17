@@ -48,24 +48,40 @@ const ResponsiveRegistrationForm = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    
+    // Map form data to the required API format
+    const mappedData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+      confirmPass: data.confirmPassword, // Adjusting to match API
+      role: data.role,
+      dateOfBirth: data.birthDate, // Adjusting to match API
+      location: data.location,
+      phoneNo: data.phoneNumber, // Adjusting to match API
+      school: data.school,
+      gradeLevel: data.gradeLevel,
+      areaOfInterest: data.areaOfInterest,
+    };
+  
     try {
-      const response = await apiClient.post("/auth/register", data);
-      console.log("Registration successful:", response.data);
-
+      console.log(mappedData); // Check the mapped data
+      const response = await apiClient.post("/auth/register", mappedData);
+      reset();
+      //console.log("Registration successful:", response.data);
+  
       // Show success toast
       toast.success("Registration successful! Redirecting to login...", {
         position: "top-center",
         autoClose: 3000,
       });
-      reset();
-      setTimeout(() => navigate('/signin'), 3000);
+      setTimeout(() => navigate("/signin"), 3000);
     } catch (error) {
       console.error(
         "Registration failed:",
         error.response?.data || error.message
       );
-
-      // Show error toast
       toast.error(
         "Failed to register. Please check your details and try again.",
         {
@@ -77,6 +93,7 @@ const ResponsiveRegistrationForm = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-10">

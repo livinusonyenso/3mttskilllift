@@ -23,13 +23,18 @@ const ResponsiveLoginForm = () => {
     setLoading(true); // Start loading
     try {
       const response = await apiClient.post('/auth/login', data);
-      console.log('Login successful:', response.data);
+      console.log('Login successful>>>>>>>>>>>>>>:', response);
+      console.log('Login successful>>>>>>>>>:', response.data);
+      console.log('Login successful>>>>>>>>>>>>>:', response.token);
       localStorage.setItem('authToken', response.data.token); // Save the token for authenticated requests
       alert('Login successful!');
-      navigate('/dashboard'); // Redirect to the correct route
+      navigate('/dashbaord'); // Redirect to the correct route
     } catch (error) {
       console.error('Login failed:', error.response?.data || error.message);
-      alert('Failed to login. Please check your credentials and try again.');
+      console.log('>>>>>>>>>>>>>>',error)
+      console.log('>>>>>>>>>>>>>>',error.response)
+      console.log('>>>>>>>>>>>>>>',error.response?.data)
+     // alert('Failed to login. Please check your credentials and try again.');
     } finally {
       setLoading(false); // End loading
     }
