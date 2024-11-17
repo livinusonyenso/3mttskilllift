@@ -1,5 +1,7 @@
 // components/HeroSection.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // For routing
+import useAuth from '../../hooks/useAuth'; // Your custom authentication hook
 
 const images = [
   'https://schoolscompass.com.ng/blog/wp-content/uploads/2020/02/jarspok.jpg',
@@ -7,12 +9,12 @@ const images = [
   'https://vitalentum.net/upload/007/u728/b/6/african-children-using-laptop-computers-in-school-photo-photos-big.webp',
   'https://ruralafricafacts.wordpress.com/wp-content/uploads/2015/07/dsc_0460.jpg',
   'https://www.robertharding.com/watermark.php?type=preview&im=RM/RH/HORIZONTAL/797-1466'
-
-  
 ];
 
 const HeroSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const { login } = useAuth(); // Assuming this tells you if the user is logged in
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,6 +23,15 @@ const HeroSection = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Handle the button click
+  const handleGetStarted = () => {
+    if (login) {
+      navigate('/dashboard'); // Redirect to dashboard if logged in
+    } else {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  };
 
   return (
     <section className="relative w-full h-screen bg-gray-900 overflow-hidden">
@@ -39,8 +50,13 @@ const HeroSection = () => {
           Empowering the Next Generation through Technology & Learning
         </h1>
         <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-lg mx-auto drop-shadow-lg">
-        Discover courses, mentorship, and resources tailored to inspire and accelerate your learning journey—with access to local language instructors who provide personalized, culturally relevant guidance.        </p>
-        <button className="mt-8 px-6 py-3 bg-green-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-green-600 transition duration-300 ease-in-out">
+          Discover courses, mentorship, and resources tailored to inspire and accelerate your learning journey—with access to local language instructors who provide personalized, culturally relevant guidance.
+        </p>
+
+        <button
+          onClick={handleGetStarted} // Attach the click handler
+          className="mt-8 px-6 py-3 bg-green-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-green-600 transition duration-300 ease-in-out"
+        >
           Get Started
         </button>
       </div>

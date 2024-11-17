@@ -1,5 +1,7 @@
 // components/FeaturedCourses.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const courses = [
   {
@@ -29,6 +31,17 @@ const courses = [
 ];
 
 const FeaturedCourses = () => {
+  const {login} = useAuth()
+  const navigate = useNavigate()
+
+
+  const handleCourse = () => {
+    if (login) {
+      navigate('/courses'); // Redirect to dashboard if logged in
+    } else {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  };
   return (
     <section className="px-6 py-12 bg-gray-100">
       <div className="container mx-auto">
@@ -73,7 +86,7 @@ const FeaturedCourses = () => {
               </div>
 
               {/* Enroll Button */}
-              <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out mt-auto">
+              <button className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out mt-auto" onClick={handleCourse}>
                 Enroll Now
               </button>
             </div>

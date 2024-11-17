@@ -1,5 +1,7 @@
 // pages/CoursesPage.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const techSkills = [
   {
@@ -77,11 +79,22 @@ const techSkills = [
 ];
 
 const CoursesPage = () => {
+    const {login} = useAuth()
+    const navigate = useNavigate()
+      // Handle the button click
+  const handleCourse = () => {
+    if (login) {
+      navigate('/dashboard'); // Redirect to dashboard if logged in
+    } else {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  };
+
   return (
     <main className="bg-gray-50 min-h-screen py-12">
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12 animate-fade-in">
-          Top 9 Tech Skills to Master
+          Top Tech Skills to Master
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {techSkills.map((course, index) => (
@@ -122,7 +135,7 @@ const CoursesPage = () => {
               </div>
 
               {/* Enroll Button */}
-              <button className="w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-indigo-700 transition duration-300 ease-in-out animate-bounce">
+              <button className="w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-indigo-700 transition duration-300 ease-in-out animate-bounce" onClick={handleCourse}>
                 Enroll Now
               </button>
             </div>
