@@ -23,6 +23,9 @@ export const loginStrategy = () => {
                 if(!isMatch){
                     return done(null, false, {message: "Incorrect email or password"})
                 }
+
+                user.password = undefined
+
                 return done(null, user)
             } catch (error) {
                 return done(error)
@@ -40,6 +43,7 @@ export const loginStrategy = () => {
 
     const jwtOptions = {
         jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.JWT_SECRET,
     }
 
