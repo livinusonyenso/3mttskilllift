@@ -50,6 +50,7 @@ function Typewriter() {
           50% { opacity: 0; }
         }
       `}</style>
+      
     </div>
   );
 }

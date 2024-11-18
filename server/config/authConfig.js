@@ -33,17 +33,17 @@ export const loginStrategy = () => {
         }
     ));
 
-    let cookieExtractor = function(req){
-        let token = null;
-        if (req && req.cookies){
-            token = req.cookies.token
-        }
-        return token;
-    }
+    // let cookieExtractor = function(req){
+    //     let token = null;
+    //     if (req && req.cookies){
+    //         token = req.cookies.token
+    //     }
+    //     return token;
+    // }
 
     const jwtOptions = {
-        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-        // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        // jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.JWT_SECRET,
     }
 
