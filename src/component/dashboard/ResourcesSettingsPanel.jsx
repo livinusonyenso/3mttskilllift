@@ -20,12 +20,12 @@ const ResourcesSettingsPanel = () => {
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg">
       {/* Navigation Bar */}
-      <div className="relative flex space-x-4 mb-6 border-b pb-4">
+      <div className="relative flex space-x-4 mb-6 border-b pb-4 overflow-x-auto">
         {['Video', 'Ebook', 'Articles', 'Podcasts'].map((tab) => (
           <button
             key={tab}
             onClick={() => handleTabClick(tab)}
-            className={`relative text-lg font-semibold ${
+            className={`relative whitespace-nowrap text-lg font-semibold ${
               activeTab === tab ? 'text-green-600' : 'text-gray-600'
             } hover:text-green-500`}
           >
@@ -54,12 +54,17 @@ const ResourcesSettingsPanel = () => {
       ) : (
         <div>
           {/* Content Grid */}
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {/* Video Tab */}
             {activeTab === 'Video' &&
               videoData.map((video) => (
                 <div key={video.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                   <a href={video.link} target="_blank" rel="noopener noreferrer">
-                    <img src={video.image} alt={`${video.title} thumbnail`} className="w-full h-40 object-cover" />
+                    <img
+                      src={video.image}
+                      alt={`${video.title} thumbnail`}
+                      className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover"
+                    />
                   </a>
                   <div className="p-4">
                     <h3 className="text-md font-semibold text-gray-800">{video.title}</h3>
@@ -69,6 +74,7 @@ const ResourcesSettingsPanel = () => {
                 </div>
               ))}
 
+            {/* Ebook Tab */}
             {activeTab === 'Ebook' &&
               ebookData.map((ebook, index) => (
                 <div key={index} className="p-4 bg-white shadow-lg rounded-lg text-center">
@@ -84,6 +90,7 @@ const ResourcesSettingsPanel = () => {
                 </div>
               ))}
 
+            {/* Articles Tab */}
             {activeTab === 'Articles' &&
               articleData.map((article, index) => (
                 <a
@@ -98,6 +105,7 @@ const ResourcesSettingsPanel = () => {
                 </a>
               ))}
 
+            {/* Podcasts Tab */}
             {activeTab === 'Podcasts' &&
               podcastData.map((podcast, index) => (
                 <div key={index} className="p-4 bg-white shadow-lg rounded-lg text-center">
