@@ -28,14 +28,14 @@ const ResponsiveLoginForm = () => {
     try {
       const response = await apiClient.post('/auth/login', data);
     // Log the response data
-    console.log('Response:', response);
-    console.log('Response Data:', response.data);
+    // console.log('Response:', response);
+    // console.log('Response Data:', response.data);
 
-    // Log token
-    console.log('Token:', response.data.token);
+    // // Log token
+    // console.log('Token:', response.data.token);
 
     // Log user information if available
-    console.log('User:', response.data.user || 'No user data available');
+    //console.log('User:', response.data.user || 'No user data available');
       toast.success('Login successful!', {
         position: "top-center",
         autoClose: 3000,

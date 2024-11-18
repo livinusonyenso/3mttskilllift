@@ -19,6 +19,9 @@ const Header = () => {
   // Fetch user profile data from API on component mount
   useEffect(() => {
     const fetchUserData = async () => {
+      // Log the token before making the request
+      console.log("Auth Token:", auth.token);
+  
       try {
         const response = await axios.get(
           "https://threemttskilllift-backend.onrender.com/api/v1/auth/current-user",
@@ -29,17 +32,34 @@ const Header = () => {
             },
           }
         );
-
-        const data = response.data;
-        setUserName(data.name || "User");
+        
+        console.log('Response:', response);
+        console.log('Response Data:', response.data);
+    
+        // Check token received from response data (optional)
+        console.log('Token in Response Data:', response.data.token);
+    
+        const {data }= response.data;
+        setUserName(data.firstName || "");
         setUserSkill(data.skill || 0);
       } catch (error) {
         console.error("Error fetching user data:", error);
+  
+        // Check for specific unauthorized error
+        if (error.response && error.response.status === 401) {
+          console.error("Unauthorized: Invalid or expired token");
+        }
       }
     };
-
-    fetchUserData();
+  
+    // Only attempt to fetch if a token exists
+    if (auth.token) {
+      fetchUserData();
+    } else {
+      console.error("No token found, unable to fetch user data");
+    }
   }, [auth.token]);
+  
 
   // Load the profile image from local storage on component mount
   useEffect(() => {
@@ -108,7 +128,7 @@ const Header = () => {
       {/* Title and Progress Bar */}
       <div className="flex flex-col items-center space-y-1 text-center">
         <h1 className="text-lg sm:text-2xl font-bold text-white tracking-wide">
-          {userName || "Software Development"}
+          {`Welome ${userName} ` || ""}
         </h1>
         
         {/* Progress Bar, hidden on very small screens */}

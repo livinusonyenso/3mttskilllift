@@ -26,7 +26,7 @@ const techSkills = [
     duration: '8 Weeks',
     description: 'Gain skills in data analysis, visualization, and machine learning.',
     rating: 4.9,
-    imageUrl: 'https://i.ytimg.com/vi/RvGQWrOpbOg/maxresdefault.jpg',
+    imageUrl: 'https://i.ytimg.com/vi/-ETQ97mXXF0/maxresdefault.jpg',
   },
   {
     title: 'UI/UX Design Masterclass',
@@ -42,7 +42,7 @@ const techSkills = [
     duration: '6 Weeks',
     description: 'Understand CI/CD pipelines and cloud-native tools like Docker and Kubernetes.',
     rating: 4.7,
-    imageUrl: 'https://i.ytimg.com/vi/nBvm54PcLSA/maxresdefault.jpg',
+    imageUrl: 'https://i.ytimg.com/vi/j5Zsa_eOXeY/maxresdefault.jpg',
   },
   {
     title: 'Full-Stack JavaScript',
@@ -58,7 +58,7 @@ const techSkills = [
     duration: '4 Weeks',
     description: 'Learn key principles of network security and ethical hacking.',
     rating: 4.6,
-    imageUrl: 'https://i.ytimg.com/vi/JvWWVvNccwU/maxresdefault.jpg',
+    imageUrl: 'https://i.ytimg.com/vi/5MMoxyK1Y9o/maxresdefault.jpg',
   },
   {
     title: 'Cloud Computing with AWS',
@@ -66,7 +66,7 @@ const techSkills = [
     duration: '9 Weeks',
     description: 'Learn cloud architecture and AWS services like EC2, S3, and Lambda.',
     rating: 4.8,
-    imageUrl: 'https://i.ytimg.com/vi/5H1CSNDr9LE/maxresdefault.jpg',
+    imageUrl: 'https://i.ytimg.com/vi/O61gbmYZJmE/maxresdefault.jpg',
   },
   {
     title: 'Blockchain Development',
@@ -74,7 +74,7 @@ const techSkills = [
     duration: '6 Weeks',
     description: 'Understand blockchain principles and create decentralized apps.',
     rating: 4.9,
-    imageUrl: 'https://i.ytimg.com/vi/_160oMzblY8/maxresdefault.jpg',
+    imageUrl: 'https://i.ytimg.com/vi/dGtXO0GkI04/maxresdefault.jpg',
   },
 ];
 

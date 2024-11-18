@@ -127,7 +127,7 @@ const AccountSettings = () => {
                   onChange={(e) => setNotifications(e.target.checked)}
                   className="mr-3 h-5 w-5 focus:ring-blue-500"
                 />
-                <label className="text-gray-700 text-sm">Enable Email Notifications</label>
+                <label className="text-gray-700 text-sm">Enable Email</label>
               </div>
             </form>
           )}

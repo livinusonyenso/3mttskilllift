@@ -12,14 +12,14 @@ const categories = [
   {
     name: 'Business',
     description: 'Learn about finance, marketing, and entrepreneurship.',
-    iconUrl: 'https://i.ytimg.com/vi/nS_hg7dywB4/maxresdefault.jpg',
+    iconUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     bgColor: 'bg-green-100',
     hoverColor: 'bg-green-200'
   },
   {
     name: 'Art & Design',
     description: 'Courses on graphic design, photography, and more.',
-    iconUrl: 'https://i.ytimg.com/vi/dZmkPmfW0XA/maxresdefault.jpg',
+    iconUrl: 'https://plus.unsplash.com/premium_photo-1664910106248-14a406867f03?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     bgColor: 'bg-pink-100',
     hoverColor: 'bg-pink-200'
   },
