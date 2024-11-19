@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { FaUserCircle } from "react-icons/fa";
 
 // Toast Notification Component
 const Toast = ({ message, onClose }) => (
@@ -10,18 +10,19 @@ const Toast = ({ message, onClose }) => (
 );
 
 const AccountSettings = () => {
-  const [activeTab, setActiveTab] = useState('profile');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [activeTab, setActiveTab] = useState("profile");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [notifications, setNotifications] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   // Load user details from local storage when component mounts
   useEffect(() => {
-    const savedUsername = localStorage.getItem('username');
-    const savedEmail = localStorage.getItem('email');
-    const savedNotifications = localStorage.getItem('notifications') === 'true';
+    const savedUsername = localStorage.getItem("username");
+    const savedEmail = localStorage.getItem("email");
+    const savedNotifications =
+      localStorage.getItem("notifications") === "true";
     if (savedUsername) setUsername(savedUsername);
     if (savedEmail) setEmail(savedEmail);
     setNotifications(savedNotifications);
@@ -29,13 +30,13 @@ const AccountSettings = () => {
 
   const handleSave = () => {
     // Save details to localStorage
-    if (activeTab === 'profile') {
-      localStorage.setItem('username', username);
-      localStorage.setItem('email', email);
-    } else if (activeTab === 'security') {
-      localStorage.setItem('password', password);
-    } else if (activeTab === 'notifications') {
-      localStorage.setItem('notifications', notifications);
+    if (activeTab === "profile") {
+      localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
+    } else if (activeTab === "security") {
+      localStorage.setItem("password", password);
+    } else if (activeTab === "notifications") {
+      localStorage.setItem("notifications", notifications);
     }
 
     // Display toast notification
@@ -46,7 +47,10 @@ const AccountSettings = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white w-full max-w-2xl p-8 rounded-lg shadow-lg relative">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Account Settings</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold text-center sm:text-left text-gray-800 mb-8">
+  Account Settings
+</h2>
+
 
         {/* User Icon */}
         <div className="flex items-center justify-center mb-6">
@@ -54,22 +58,34 @@ const AccountSettings = () => {
         </div>
 
         {/* Tabs for Forms */}
-        <div className="flex justify-around mb-8 border-b-2 pb-2">
+        <div className="flex flex-wrap justify-around mb-10 border-b-2 pb-2">
           <button
-            className={`text-lg ${activeTab === 'profile' ? 'text-blue-600 font-bold border-b-4 border-blue-600' : 'text-gray-500'}`}
-            onClick={() => setActiveTab('profile')}
+            className={`flex-1 sm:flex-initial text-center py-2 ${
+              activeTab === "profile"
+                ? "text-blue-600 font-bold border-b-4 border-blue-600"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("profile")}
           >
             Profile
           </button>
           <button
-            className={`text-lg ${activeTab === 'security' ? 'text-blue-600 font-bold border-b-4 border-blue-600' : 'text-gray-500'}`}
-            onClick={() => setActiveTab('security')}
+            className={`flex-1 sm:flex-initial text-center py-2 ${
+              activeTab === "security"
+                ? "text-blue-600 font-bold border-b-4 border-blue-600"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("security")}
           >
             Security
           </button>
           <button
-            className={`text-lg ${activeTab === 'notifications' ? 'text-blue-600 font-bold border-b-4 border-blue-600' : 'text-gray-500'}`}
-            onClick={() => setActiveTab('notifications')}
+            className={`flex-1 sm:flex-initial text-center py-2 ${
+              activeTab === "notifications"
+                ? "text-blue-600 font-bold border-b-4 border-blue-600"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("notifications")}
           >
             Notifications
           </button>
@@ -77,10 +93,12 @@ const AccountSettings = () => {
 
         {/* Forms */}
         <div className="space-y-6">
-          {activeTab === 'profile' && (
+          {activeTab === "profile" && (
             <form>
               <div>
-                <label className="block text-gray-700 text-sm font-medium mb-2">Username</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">
+                  Username
+                </label>
                 <input
                   type="text"
                   value={username}
@@ -91,7 +109,9 @@ const AccountSettings = () => {
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-medium mb-2">Email</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">
+                  Email
+                </label>
                 <input
                   type="email"
                   value={email}
@@ -103,10 +123,12 @@ const AccountSettings = () => {
             </form>
           )}
 
-          {activeTab === 'security' && (
+          {activeTab === "security" && (
             <form>
               <div>
-                <label className="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2">
+                  Password
+                </label>
                 <input
                   type="password"
                   value={password}
@@ -118,7 +140,7 @@ const AccountSettings = () => {
             </form>
           )}
 
-          {activeTab === 'notifications' && (
+          {activeTab === "notifications" && (
             <form>
               <div className="flex items-center">
                 <input
@@ -127,7 +149,9 @@ const AccountSettings = () => {
                   onChange={(e) => setNotifications(e.target.checked)}
                   className="mr-3 h-5 w-5 focus:ring-blue-500"
                 />
-                <label className="text-gray-700 text-sm">Enable Email</label>
+                <label className="text-gray-700 text-sm">
+                  Enable Email Notifications
+                </label>
               </div>
             </form>
           )}
@@ -139,11 +163,16 @@ const AccountSettings = () => {
           onClick={handleSave}
           className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300 mt-6"
         >
-          Save Settings
+          Save 
         </button>
 
         {/* Toast Notification */}
-        {showToast && <Toast message="Account details updated successfully!" onClose={() => setShowToast(false)} />}
+        {showToast && (
+          <Toast
+            message="Account details updated successfully!"
+            onClose={() => setShowToast(false)}
+          />
+        )}
       </div>
     </div>
   );

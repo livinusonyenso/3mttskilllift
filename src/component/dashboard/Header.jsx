@@ -33,8 +33,8 @@ const Header = () => {
           }
         );
         
-        console.log('Response:', response);
-        console.log('Response Data:', response.data);
+        // console.log('Response:', response);
+        // console.log('Response Data:', response.data);
     
         // Check token received from response data (optional)
         console.log('Token in Response Data:', response.data.token);
