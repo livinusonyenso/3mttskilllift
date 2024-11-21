@@ -69,7 +69,7 @@ const Header = ({ toggleTheme }) => {
           className="h-10 w-10 rounded-full object-cover border-2 border-white"
         />
         <div className="ml-4">
-          <h2 className="text-lg font-semibold">Welcome, {userName}!</h2>
+          <h2 className="text-lg font-semibold">Hello  {userName}, Welcome to your SkillLift Dashboard</h2>
           <div className="flex items-center mt-1">
             <div className="relative w-24 h-3 bg-gray-200 rounded-full overflow-hidden">
               <div

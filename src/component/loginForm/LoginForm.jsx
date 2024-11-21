@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { toast, ToastContainer } from 'react-toastify'; // Import toast functions
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import apiClient from '../../utils/axios';
-import useAuth from "../../hooks/useAuth"
+import useAuth from "../../hooks/useAuth";
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 // Validation Schema
 const schema = yup.object().shape({
@@ -15,54 +16,46 @@ const schema = yup.object().shape({
 });
 
 const ResponsiveLoginForm = () => {
-  const {login}  = useAuth()
+  const { login } = useAuth();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const [loading, setLoading] = useState(false); // State to manage loading spinner
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Password visibility toggle state
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = async (data) => {
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
       const response = await apiClient.post('/auth/login', data);
-    // Log the response data
-    // console.log('Response:', response);
-    // console.log('Response Data:', response.data);
-
-    // // Log token
-    // console.log('Token:', response.data.token);
-
-    // Log user information if available
-    //console.log('User:', response.data.user || 'No user data available');
       toast.success('Login successful!', {
         position: "top-center",
         autoClose: 3000,
-      }); // Show success toast
+      });
       login(response.data.token);
-
-       navigate('/dashboardmain')
-    
+      navigate('/dashboardmain');
     } catch (error) {
-      // Handle error response
-      const errorMessage =
-        error.response?.data?.message || 'Failed to login. Please check your credentials.';
+      const errorMessage = error.response?.data?.message || 'Failed to login. Please check your credentials.';
       toast.error(errorMessage, {
         position: "top-center",
         autoClose: 3000,
-      }); // Show error toast
-      console.error('Login failed:', error.response?.data || error.message);
+      });
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
 
   return (
     <div className="max-w-sm mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
-      <ToastContainer /> {/* Add the ToastContainer */}
+      <ToastContainer />
       <h2 className="text-2xl font-semibold text-center text-green-600 mb-6">Login</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        
         {/* Email Field */}
         <div>
           <label className="block text-lg font-medium text-gray-700">Email Address</label>
@@ -75,14 +68,23 @@ const ResponsiveLoginForm = () => {
         </div>
 
         {/* Password Field */}
-        <div>
+        <div className="relative">
           <label className="block text-lg font-medium text-gray-700">Password</label>
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             {...register('password')}
-            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 pr-10"
           />
           {errors.password && <p className="text-red-500 text-sm">{errors.password?.message}</p>}
+          
+          {/* Toggle Password Visibility Icon, Center-Aligned */}
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute inset-y-0 right-3 flex items-center justify-center text-gray-600 mt-7"
+          >
+            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          </button>
         </div>
 
         {/* Submit Button */}

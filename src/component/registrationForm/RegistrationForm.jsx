@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import apiClient from "../../utils/axios";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 // Validation Schema
 const schema = yup.object().shape({
@@ -45,10 +46,14 @@ const ResponsiveRegistrationForm = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
 
   const onSubmit = async (data) => {
     setLoading(true);
-
     const mappedData = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -68,18 +73,12 @@ const ResponsiveRegistrationForm = () => {
       console.log(mappedData);
       const response = await apiClient.post("/auth/register", mappedData);
       reset();
-      console.log("Registration successful:", response.data);
-
       toast.success("Registration successful! Redirecting to login...", {
         position: "top-center",
         autoClose: 3000,
       });
       setTimeout(() => navigate("/signin"), 3000);
     } catch (error) {
-      console.error(
-        "Registration failed:",
-        error.response?.data || error.message
-      );
       toast.error(
         "Failed to register. Please check your details and try again.",
         {
@@ -104,12 +103,6 @@ const ResponsiveRegistrationForm = () => {
           { label: "First Name", name: "firstName", type: "text" },
           { label: "Last Name", name: "lastName", type: "text" },
           { label: "Email Address", name: "email", type: "email" },
-          { label: "Password", name: "password", type: "password" },
-          {
-            label: "Confirm Password",
-            name: "confirmPassword",
-            type: "password",
-          },
           { label: "Username", name: "username", type: "text" },
           {
             label: "Role",
@@ -168,6 +161,48 @@ const ResponsiveRegistrationForm = () => {
             )}
           </div>
         ))}
+
+        {/* Password Field */}
+        <div className="relative mt-7">
+          <label className="block text-lg font-medium text-gray-700">Password</label>
+          <input
+            type={showPassword ? "text" : "password"}
+            {...register("password")}
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 pr-10"
+          />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password?.message}</p>
+          )}
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute inset-y-0 right-3 flex items-center text-gray-600 mt-7"
+          >
+            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          </button>
+        </div>
+
+        {/* Confirm Password Field */}
+        <div className="relative mt-7">
+          <label className="block text-lg font-medium text-gray-700">Confirm Password</label>
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            {...register("confirmPassword")}
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 pr-10"
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>
+          )}
+          <button
+            type="button"
+            onClick={toggleConfirmPasswordVisibility}
+            className="absolute inset-y-0 right-3 flex items-center text-gray-600 mt-7"
+          >
+            {showConfirmPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          </button>
+        </div>
+
+        {/* Submit Button */}
         <div>
           <button
             type="submit"
