@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { 
   MdDashboard, MdSchool, MdWork, MdOfflineBolt, MdSettings, MdLanguage, 
-  MdSync, MdDownload, MdMenu, MdClose 
+  MdSync, MdDownload, MdMenu, MdClose,MdLogout
 } from "react-icons/md";
 import { FaSyncAlt, FaCloudDownloadAlt } from "react-icons/fa";
 import { Switch } from "@headlessui/react";
@@ -131,8 +131,8 @@ const Sidebar = () => {
           <MdDownload className="inline mr-2" />
           {isExpanded && "Download All Content"}
         </button>
-        <a href="#logout" className="block mt-2 text-center hover:bg-gray-100 py-2" onClick={logout}>
-          {isExpanded ? "Logout" : <MdDownload />}
+        <a href="#logout" className="block mt-2 text-center hover:bg-red-700 py-2" onClick={logout}>
+          {isExpanded ? "Logout" : <MdLogout />}
         </a>
       </div>
     </aside>

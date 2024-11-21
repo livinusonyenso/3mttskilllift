@@ -20,7 +20,7 @@ const DashboardMain = () => {
           <Sidebar className="w-64 bg-green-500" />
           
           {/* Content area */}
-          <main className="flex-1 bg-gray-100 dark:bg-gray-800 p-6 overflow-auto">
+          <main className="flex-1  p-6 overflow-auto">
             <Outlet />
           </main>
         </div>
