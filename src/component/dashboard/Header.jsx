@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { FaBell, FaCog } from "react-icons/fa";
 import NotificationsModal from "./NotificationsModal";
-import AccountSettings from "./AccountSettings";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
@@ -157,31 +156,7 @@ const Header = () => {
           )}
         </div>
 
-        {/* Settings Icon */}
-        <div className="relative z-50">
-          <FaCog
-            className="text-white text-lg sm:text-xl hover:text-yellow-300 cursor-pointer transition duration-300"
-            onClick={toggleDropdown}
-          />
-          {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-32 sm:w-48 bg-white rounded-lg shadow-lg py-2 text-gray-700">
-              <a
-                href="#account"
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowAccountSettings(true);
-                }}
-              >
-                Account Settings
-              </a>
-              {showAccountSettings && <AccountSettings />}
-              <a href="#logout" className="block px-4 py-2 hover:bg-gray-100" onClick={logout}>
-                Logout
-              </a>
-            </div>
-          )}
-        </div>
+    
       </div>
 
       {/* Notifications Modal */}

@@ -46,7 +46,7 @@ const ResponsiveNavbar = () => {
             </li>
           ) : (
             <li className="py-2 md:py-0 hover:text-green-800">
-              <Link to="/dashboard" onClick={closeMenu}>
+              <Link to="/dashboardmain" onClick={closeMenu}>
               Dashboard
               </Link>
             </li>
@@ -61,6 +61,7 @@ const ResponsiveNavbar = () => {
               Peer Group
             </Link>
           </li>
+      
           <li className="py-2 md:py-0 hover:text-green-800">
             <Link to="/courses" onClick={closeMenu}>
               Courses

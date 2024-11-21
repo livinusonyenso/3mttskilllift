@@ -42,7 +42,7 @@ const ResponsiveLoginForm = () => {
       }); // Show success toast
       login(response.data.token);
 
-       navigate('/dashboard')
+       navigate('/dashboardmain')
     
     } catch (error) {
       // Handle error response
