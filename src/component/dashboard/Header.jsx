@@ -127,7 +127,7 @@ const Header = () => {
       {/* Title and Progress Bar */}
       <div className="flex flex-col items-center space-y-1 text-center">
         <h1 className="text-lg sm:text-2xl font-bold text-white tracking-wide">
-          {`Welome ${userName} ` || ""}
+          {`Hello ${userName},Welcome to your SkillLift Dashboard ` || ""}
         </h1>
         
         {/* Progress Bar, hidden on very small screens */}
