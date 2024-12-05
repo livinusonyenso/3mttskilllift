@@ -8,19 +8,19 @@ import 'slick-carousel/slick/slick-theme.css';
 const testimonials = [
   {
     quote: "SkillLift empowered my son with valuable tech skills. He’s now coding confidently and loves solving real-world problems!",
-    name: "Linda Thompson",
+    name: "Roland Uche",
     role: "Parent",
     image: "https://pbs.twimg.com/profile_images/1844754952993812490/qeh1hsKK_400x400.jpg",
   },
   {
     quote: "Learning tech skills with SkillLift made a huge difference! I went from struggling to building projects I’m proud of.",
-    name: "Jake Harris",
+    name: "jane Harris",
     role: "Student",
     image: "https://pbs.twimg.com/profile_images/1852067144038780931/b22VOX81_400x400.jpg",
   },
   {
     quote: "As a parent, I’m thrilled to see my child learning skills that will set them up for future success in tech and innovation.",
-    name: "Maria Gomez",
+    name: "Livinus Ekene",
     role: "Parent",
     image: "https://pbs.twimg.com/profile_images/1811473980966207491/g-V3s0I8_400x400.jpg",
   },

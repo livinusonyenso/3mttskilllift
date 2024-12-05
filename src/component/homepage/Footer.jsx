@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="text-center md:text-left">
           <h3 className="text-lg font-semibold">Contact Us</h3>
           <p className="text-gray-400 mt-2">Email: support@skilllift.com</p>
-          <p className="text-gray-400">Phone: +1 (555) 123-4567</p>
+          <p className="text-gray-400">Phone: +2348139422159</p>
         </div>
 
         {/* Links */}

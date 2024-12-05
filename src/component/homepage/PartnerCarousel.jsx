@@ -8,8 +8,8 @@ const partners = [
   { name: '3mtt', img: 'https://app.3mtt.training/static/media/main.242b8b1ce339b38fd589.png' },
   { name: 'Utiva', img: 'https://utiva.io/static/media/utivacolored.7364336b.svg' },
   { name: 'hack51', img: 'https://hack51.africa/wp-content/uploads/elementor/thumbs/hack51-nav-logo-qr1bmwyzpfnd87g08fp0ojcgri4uqdjb59vm1cxaoq.png' },
-  { name: 'Dahel', img: 'https://scontent.fabb1-3.fna.fbcdn.net/v/t39.30808-6/273678184_103505842270427_7842191907460115838_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGysd22dW5etP5hMf0jrl8eNinuEwI7N_42Ke4TAjs3_vv6-s9hw0lB9rFEw75On6qA_6GurpX_TYRAxyxTnEKe&_nc_ohc=2WXYJjP6LAkQ7kNvgH6f-r8&_nc_zt=23&_nc_ht=scontent.fabb1-3.fna&_nc_gid=A2k0PN06NT2urlyKa_Ntg7x&oh=00_AYCDdjAJ4ZrVTbXrcJ3L1wqO-6RHZHSu0OTkcRtnc93pMw&oe=6738E11F' },
-  { name: 'Guru', img: 'https://scontent.fabb1-1.fna.fbcdn.net/v/t39.30808-6/310736201_104199882474134_3117684508541822745_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFCdGBu964i3n66XVf0eOvqwNAnh7ZE-y3A0CeHtkT7LWJuM_43sCYPes3phrXLBQjBp1wWkxrXwNrerKF6e1in&_nc_ohc=w0VYoWFLe8UQ7kNvgGoeBIb&_nc_zt=23&_nc_ht=scontent.fabb1-1.fna&_nc_gid=AYYcvtxDGCZixkM0dUjYEnB&oh=00_AYDikEImHAhVsAVWE1alpqRL2qiLGt7viRNkoHITveGhTQ&oe=6738F0F8' },
+  { name: 'Dahel', img: 'https://pbs.twimg.com/profile_images/1707911067555241984/Tf7Gvezt_400x400.jpg' },
+  { name: 'Guru', img: 'https://media.licdn.com/dms/image/v2/C4D0BAQHcOVpKpOVyMQ/company-logo_200_200/company-logo_200_200/0/1678480233101?e=1741219200&v=beta&t=CmMoU5juCwOWIdvYs0gDdHZ_pEC5lyGJivl0bGdFscw' },
   { name: 'Cross River State', img: 'https://www.crossriverstate.gov.ng/assets/crs_logo_white-087ea47b.png' },
   // Duplicate logos for seamless looping
 ];
